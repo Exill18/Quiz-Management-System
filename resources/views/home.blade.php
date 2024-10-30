@@ -25,7 +25,11 @@
                 <h1 class="text-xl font-semibold">Welcome to</h1>
                 <h1 class="text-4xl font-semibold">Online Management Quiz System</h1>
                 <p class="text-sm/relaxed mt-4 mb-12">This is a simple quiz system that allows you to create, manage, and take Quizzes online.</p>
+                @auth
+                    <a href="{{ route('users.userDash') }}" class="mt-12 inline-block px-6 py-2 bg-gradient-to-b from-transparent via-white to-white rounded-lg text-black font-semibold hover:text-white hover:bg-\#FF2D20 transition duration-300">Get Started</a>
+                @else
                 <a href="{{ route('login') }}" class="mt-12 inline-block px-6 py-2 bg-gradient-to-b from-transparent via-white to-white rounded-lg text-black font-semibold hover:text-white hover:bg-\#FF2D20 transition duration-300">Get Started</a>
+                @endauth
             </div>
         </div>
 
@@ -33,3 +37,10 @@
 
     </body>
 </html>
+<script>
+    document.addEventListener('mousemove', (e) => {
+        const x = e.clientX / window.innerWidth;
+        const y = e.clientY / window.innerHeight;
+        document.body.style.background = `radial-gradient(circle 00px at ${x * 100}% ${y * 100}%, #FF2D20, #000)`;
+    });
+</script>

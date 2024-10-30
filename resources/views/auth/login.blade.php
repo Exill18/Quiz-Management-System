@@ -1,6 +1,6 @@
 <x-layout>
 
-    <div class="max-w-md mx-auto p-4 pt-6 pb-8 mb-4 bg-white rounded shadow-xl shadow-black">
+    <div class="max-w-md mx-auto p-4 pt-6 pb-8 mb-4 bg-white rounded shadow-md ">
         <h2 class="text-center text-2xl font-bold">Login</h2>
         <form method="POST" action="/login" class="">
             @csrf

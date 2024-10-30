@@ -38,7 +38,6 @@ Route::post('/logout', [SessionController::class, 'destroy'])->name('logout');
 // Edit User
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [UserController::class, 'userDash'])->name('users.userDash');
-    Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
     Route::patch('/users/update-field', [UserController::class, 'updateField'])->name('users.updateField');
     Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('user.destroy');
     Route::patch('/users/update-password', [UserController::class, 'updatePassword'])->name('users.updatePassword');

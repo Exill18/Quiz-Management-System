@@ -34,18 +34,24 @@
                 return;
             }
 
-            fetch(`/users/${userId}`, {
-                method: 'DELETE',
-                headers: {
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                }
-            }).then(response => {
-                console.log("Account deleted successfully");
-                window.location.href = '/';
-            }).catch(error => {
-                console.error("Error:", error);
-            });
+                fetch(`/users/${userId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                        'Content-Type': 'application/json',
+                    },
+                })
+                .then(response => {
+                    if (response.ok) {
+                        console.log("Account deleted successfully");
+                        window.location.href = '/';
+                    } else {
+                        throw new Error("Failed to delete the account.");
+                    }
+                })
+                .catch(error => console.error("Error:", error));
         }
+
 
         function openEditFieldDialog(field) {
             if (field === 'password') {
@@ -83,7 +89,7 @@
     </script>
 
     <div class="min-h-full">
-        <nav class="bg-teal-700 p-1.5 shadow-lg">
+        <nav class=" bg-orange-500 p-1.5 shadow-lg">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div class="flex h-16 items-center justify-between">
                     <div class="flex items-center">
