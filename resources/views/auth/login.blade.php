@@ -60,7 +60,7 @@
             </div>
             <div class="flex space-x-4">
                 <x-nav-link href="/" :active="request()->is('/')">Home</x-nav-link>
-                <x-nav-link href="/quiz" :active="request()->is('quiz')">Quizes</x-nav-link>
+                <x-nav-link href="/quizzes" :active="request()->is('quiz')">Quizes</x-nav-link>
                 <x-nav-link href="/contact" :active="request()->is('contact')">Contacts</x-nav-link>
                 <x-nav-link href="/pricing" :active="request()->is('pricing')">Pricing</x-nav-link>
             </div>

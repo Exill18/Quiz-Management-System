@@ -24,7 +24,7 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'email', 'unique:users,email'],
             'password' => ['required', Password::min(8)->letters(), 'confirmed'],
         ]);
-    
+
 
         $user = User::create($validate);
 
@@ -60,7 +60,7 @@ class RegisteredUserController extends Controller
     public function userDash()
     {
         $users = User::all();
-        return view('auth.user_dash', compact('users'));
+        return view('auth.dashboard', compact('users'));
     }
 
     public function update(Request $request, User $user)

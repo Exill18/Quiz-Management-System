@@ -6,7 +6,7 @@
     <div class="container mx-auto py-8">
         
         <h2 class="text-2xl font-bold mb-2">Privacy Policy</h2>
-        <p class="mb-4">Your privacy is important to us. It is EasyLinks' policy to respect your privacy regarding any information we may collect from you across our website, https://easylinks.com, and other sites we own and operate.</p>
+        <p class="mb-4">Your privacy is important to us. It is OMGS' policy to respect your privacy regarding any information we may collect from you across our website, https://easylinks.com, and other sites we own and operate.</p>
 
         <p class="mb-4">We only ask for personal information when we truly need it to provide a service to you. We collect it by fair and lawful means, with your knowledge and consent. We also let you know why we're collecting it and how it will be used.</p>
 

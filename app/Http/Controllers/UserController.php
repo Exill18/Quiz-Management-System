@@ -15,7 +15,7 @@ class UserController extends Controller
     public function userDash()
     {
         $users = Auth::user(); // Or however you fetch the user(s) you need
-        return view('user_dash', compact('users'));
+        return view('auth/dashboard', compact('users'));
     }
 
     public function profile()
