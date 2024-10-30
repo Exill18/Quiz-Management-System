@@ -1,7 +1,5 @@
 <x-layout>
-    <x-slot name="heading">
-        Hello {{ auth()->user()->name }}
-    </x-slot>
+    
 
     <div class="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-lg">
         <div class="space-y-6">

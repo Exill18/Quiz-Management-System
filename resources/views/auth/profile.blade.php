@@ -1,7 +1,5 @@
 <x-layout>
-    <x-slot name="heading">
-        Dashboard User
-    </x-slot>
+    t>
 
     <h2 class="font-bold text-lg">User Dashboard</h2>
 

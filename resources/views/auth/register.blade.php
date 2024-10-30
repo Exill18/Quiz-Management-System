@@ -1,9 +1,8 @@
 <x-layout>
-    <x-slot name="heading">
-        Register
-    </x-slot>
+    
 
     <div class="max-w-md mx-auto p-4 pt-6 pb-8 mb-4 bg-white rounded shadow-md">
+        <h2 class="text-center text-2xl font-bold">Register</h2>
         <form method="POST" action="/register" class="">
             @csrf
 

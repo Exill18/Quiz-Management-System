@@ -1,11 +1,9 @@
 <!-- resources/views/contact.blade.php -->
 <x-layout>
-    <x-slot name="heading">
-        Contact our team
-    </x-slot>
-
+    
 
     <div class="box flex justify-center items-center mb-10">
+        <h1 class="text-2xl font-bold">Contact Us</h1>
         <form action="{{ route('contact.submit') }}" method="POST" class="bg-white shadow-lg rounded px-8 pt-6 pb-8 mb-4">
             @csrf
             <div class="mb-4">

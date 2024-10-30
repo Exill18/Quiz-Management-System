@@ -1,7 +1,5 @@
 <x-layout>
-    <x-slot name="heading">
-        Payment Page
-    </x-slot>
+    
 
     <div class="flex justify-center items-center h-screen">
         <div class="max-w-md w-full p-6 bg-white rounded-lg shadow-md">

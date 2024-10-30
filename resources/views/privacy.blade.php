@@ -1,7 +1,5 @@
 <x-layout>
-    <x-slot name="heading">
-        Privacy Policy
-    </x-slot>
+    
 
     <div class="container mx-auto py-8">
         

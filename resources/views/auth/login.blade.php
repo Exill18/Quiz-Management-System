@@ -1,14 +1,12 @@
 <x-layout>
-    <x-slot name="heading">
-        Log in
-    </x-slot>
 
-    <div class="max-w-md mx-auto p-4 pt-6 pb-8 mb-4 bg-white rounded shadow-md">
+    <div class="max-w-md mx-auto p-4 pt-6 pb-8 mb-4 bg-white rounded shadow-xl shadow-black">
+        <h2 class="text-center text-2xl font-bold">Login</h2>
         <form method="POST" action="/login" class="">
             @csrf
 
             <div class="space-y-6">
-                <div class="border-b border-white pb-6">
+                <div class="border-b border-gray-600 pb-6">
                     <div class="w-full px-3 mb-6 md:mb-0">
                         <x-form-field>
                             <x-form-label for="email" class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Email</x-form-label>

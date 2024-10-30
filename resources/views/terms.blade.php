@@ -1,10 +1,7 @@
 <x-layout>
-    
 
     <div class="container mx-auto py-8">
-        <x-slot name="heading">
-            Terms of service
-        </x-slot>
+        <h1 class="text-2xl font-bold">Terms and Conditions</h1>
 
         <div class="prose">
                     <h3 class="text-lg font-bold">Introduction</h3>
