@@ -141,4 +141,58 @@ class QuizController extends Controller
         return redirect()->route('quizzes.results', $quiz);
     }
 
+    public function edit(Quiz $quiz)
+    {
+        $tags = Tag::all();
+        return view('quizzes.updateQuiz', compact('quiz', 'tags'));
+    }
+
+    public function update(Request $request, Quiz $quiz)
+    {
+        $data = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'tags' => 'nullable|string',
+            'exercises' => 'array|required',
+            'exercises.*.question' => 'string|required',
+            'exercises.*.solution' => 'string|required',
+            'exercises.*.score' => 'integer|required',
+        ]);
+
+        $quiz->update([
+            'title' => $data['title'],
+            'description' => $data['description'],
+        ]);
+
+        // Handle tags
+        if (!empty($data['tags'])) {
+            $tags = explode(',', $data['tags']);
+            $tagIds = collect($tags)->map(fn($tagName) => Tag::firstOrCreate(['name' => trim($tagName)])->id);
+            $quiz->tags()->sync($tagIds);
+        }
+
+        // Update exercises with solutions and scores
+        $quiz->exercises()->delete(); // Delete existing exercises
+        
+        foreach ($data['exercises'] as $exercise) {
+            $quiz->exercises()->create([
+                'question' => $exercise['question'],
+                'solution' => $exercise['solution'],
+                'score' => $exercise['score'],
+            ]);
+        }
+        //Update Results by deleting the old 
+        $quiz->participants()->delete();
+
+        return redirect()->route('quizzes.show', $quiz)->with('success', 'Quiz updated successfully!');
+    }
+
+    public function destroy(Quiz $quiz)
+    {
+        $quiz->delete();
+        return redirect()->route('quizzes.index')->with('success', 'Quiz deleted successfully!');
+    }
+
+
+
 }

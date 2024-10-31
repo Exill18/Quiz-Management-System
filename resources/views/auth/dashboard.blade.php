@@ -9,12 +9,14 @@
                     <div class="mt-1">
                         <p id="name" class="block w-full bg-gray-100 text-gray-700 border border-gray-300 rounded-md py-2 px-3">{{ auth()->user()->name }}</p>
                     </div>
+                    <button onclick="openEditFieldDialog('name')" class="text-xs text-blue-500 mt-2 underline">Edit name.</button>
                 </div>
                 <div>
                     <x-form-label for="email" class="block text-gray-700 text-sm font-medium">Email</x-form-label>
                     <div class="mt-1">
                         <p id="email" class="block w-full bg-gray-100 text-gray-700 border border-gray-300 rounded-md py-2 px-3">{{ auth()->user()->email }}</p>
                     </div>
+                    <button onclick="openEditFieldDialog('email')" class="text-xs text-blue-500 mt-2 underline">Edit email.</button>
                 </div>
                 <div>
                     <x-form-label for="password" class="block text-gray-700 text-sm font-medium">Password</x-form-label>
@@ -22,6 +24,59 @@
                         <p id="password" class="block w-full bg-gray-100 text-gray-700 border border-gray-300 rounded-md py-2 px-3">********</p>
                     </div>
                     <button  onclick="openEditFieldDialog('password')" class="text-xs text-blue-500 mt-2 underline">Change password.</button>
+                    
+                    <!--Edit field dialog-->
+                    <!-- Edit field dialog -->
+                    <div id="editFieldDialog" class="hidden fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+                        <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                            <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+                            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+                            <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+                                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                                    <div class="">
+
+                                        <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                                            <h3 class="text-lg leading-6 font-medium text-gray-900" id="editFieldLabel">Edit Field</h3>
+                                            <div class="mt-2">
+                                                <form id="editFieldForm" method="POST" action="/users/update-field">
+                                                    @csrf
+                                                    @method('PATCH')
+                                                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                                                    <div class="relative mt-6">
+                                                        <input name="editFieldInput" id="editFieldInput" type="text" required
+                                                          class="block w-full rounded-2xl border border-neutral-300 bg-transparent py-4 pl-6 pr-20 text-base/6 text-neutral-950 ring-4 ring-transparent transition placeholder:text-neutral-500 focus:border-neutral-950 focus:outline-none focus:ring-neutral-950/5"
+                                                        />
+                                                        <div class="absolute inset-y-1 right-1 flex justify-end">
+                                                            <button
+                                                                type="submit"
+                                                                aria-label="Submit"
+                                                                class="flex aspect-square h-full items-center justify-center rounded-xl bg-neutral-950 text-white transition hover:bg-neutral-800"
+                                                            >
+                                                                <svg viewBox="0 0 16 6" aria-hidden="true" class="w-4">
+                                                                <path
+                                                                    fill="currentColor"
+                                                                    fill-rule="evenodd"
+                                                                    clip-rule="evenodd"
+                                                                    d="M16 3 10 .5v2H0v1h10v2L16 3Z"
+                                                                ></path>
+                                                                </svg>
+                                                            </button>
+                                                        </div>
+                                                      </div>
+
+                                                    <button type="button" onclick="closeEditFieldDialog()" class="absolute top-1 right-1 -mt-2 -mr-2 bg-white p-2 rounded-full text-gray-500 hover:text-gray-700 focus:outline-none">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                                        </svg>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <!-- Edit password dialog -->
                     <div id="editPasswordDialog" class="hidden fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
                             <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
@@ -105,6 +160,7 @@
                     </div>
                 </div>
             </div>
+            <!--
             <div class="space-y-4">
                 <h3 class="text-xl leading-6 font-medium text-gray-900 mt-6">Subscription</h3>
                 <div class="mt-2">
@@ -143,6 +199,7 @@
                     </p>
                 </div>
             </div>
+            -->
             
                 <div class="flex items-center space-x-4 justify-center mt-6">
                     <a href="/" class="bg-gray-600 hover:bg-gray-700 text-white font-semibold  py-2 px-4 rounded-md">Back to Home</a>
@@ -165,10 +222,18 @@
             @else
                 <ul class="list-disc pl-5 text-gray-700">
                     @foreach($recentQuizzes as $quiz)
-                        <li>
+                        <li class="list-none mb-2 flex items-center space-x-1">
                             <a href="{{ route('quizzes.show', $quiz) }}" class="text-blue-600 hover:underline">
                                 {{ $quiz->title }}
-                            </a> - Created on {{ $quiz->created_at->format('d M Y') }}
+                            </a>
+                            <a href="{{ route('quizzes.results', $quiz) }}" class="bg-green-600 text-white py-1 px-3 rounded-md hover:bg-green-700">Results</a>
+                            <a href="{{ route('quizzes.edit', $quiz) }}" class="bg-indigo-600 text-white py-1 px-3 rounded-md hover:bg-indigo-700">Edit</a>
+                            <form action="{{ route('quizzes.destroy', $quiz) }}" method="POST" class="inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="bg-red-600 text-white py-1 px-2 rounded-md hover:bg-red-700">Delete</button>
+                            </form>
+                            <span class="text-gray-400">{{ $quiz->created_at->diffForHumans() }}</span>
                         </li>
                     @endforeach
                 </ul>
