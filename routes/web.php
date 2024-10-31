@@ -39,8 +39,23 @@ Route::post('/logout', [SessionController::class, 'destroy'])->name('logout');
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [UserController::class, 'userDash'])->name('users.userDash');
     Route::patch('/users/update-field', [UserController::class, 'updateField'])->name('users.updateField');
-    Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('user.destroy');
+    Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
     Route::patch('/users/update-password', [UserController::class, 'updatePassword'])->name('users.updatePassword');
 
 });
 
+
+// Quiz Routes
+Route::middleware('auth')->group(function () {
+    Route::get('/quizzes/create', [QuizController::class, 'create'])->name('quizzes.create');
+    Route::post('/quizzes', [QuizController::class, 'store'])->name('quizzes.store');
+    Route::get('/quizzes/{quiz}', [QuizController::class, 'show'])->name('quizzes.show');
+    Route::post('/quizzes/{quiz}/submit', [QuizController::class, 'submit'])->name('quizzes.submit');
+    Route::get('/quizzes/{quiz}/results', [QuizController::class, 'results'])->name('quizzes.results');
+});
+
+
+// link share quiz
+
+Route::get('/quizzes/{slug}/share', [QuizController::class, 'shared'])->name('quizzes.shared');
+Route::post('/quizzes/{slug}/share/submit', [QuizController::class, 'submitSharedQuiz'])->name('quizzes.shared.submit');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Link;
 use App\Models\Plan;
 use App\Models\User;
+use App\Models\Quiz;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Auth;
@@ -13,10 +14,15 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     public function userDash()
-    {
-        $users = Auth::user(); // Or however you fetch the user(s) you need
-        return view('auth/dashboard', compact('users'));
-    }
+{
+    $user = Auth::user();
+    $recentQuizzes = Quiz::where('user_id', $user->id)
+                        ->latest()
+                        ->take(5)
+                        ->get(); // Get the latest 5 quizzes
+
+    return view('auth/dashboard', compact('user', 'recentQuizzes'));
+}
 
     public function profile()
     {

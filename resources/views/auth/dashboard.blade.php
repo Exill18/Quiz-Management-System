@@ -157,35 +157,22 @@
         <!-- Last Quizzes Section -->
         
     </div>
-    <div class="">
-        <div class="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-lg mt-8">
-            <h2 class="text-xl font-semibold text-gray-700 mb-4">Last Quizzes</h2>
-            <div class="space-y-4">
-                <div>
-                    <x-form-field>
-                        <x-form-label for="recent-activity" class="block text-gray-700 text-sm font-medium">Recent Activity</x-form-label>
-                        <div class="mt-1">
-                            <ul id="recent-activity" class="list-disc pl-5 text-gray-700">
-                                <li>Completed Quiz: Laravel Basics</li>
-                                <li>Scored 85% on JavaScript Quiz</li>
-                                <li>Joined the "Advanced PHP" course</li>
-                            </ul>
-                        </div>
-                    </x-form-field>
-                </div>
-                <div>
-                    <x-form-field>
-                        <x-form-label for="upcoming-quizzes" class="block text-gray-700 text-sm font-medium">Upcoming Quizzes</x-form-label>
-                        <div class="mt-1">
-                            <ul id="upcoming-quizzes" class="list-disc pl-5 text-gray-700">
-                                <li>React Basics - 25th Oct</li>
-                                <li>Vue.js Intermediate - 30th Oct</li>
-                                <li>Node.js Advanced - 5th Nov</li>
-                            </ul>
-                        </div>
-                    </x-form-field>
-                </div>
-            </div>
+    <div class="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-lg mt-8">
+        <h2 class="text-xl font-semibold text-gray-700 mb-4">Recent Quizzes</h2>
+        <div class="space-y-4">
+            @if($recentQuizzes->isEmpty())
+                <p>No recent quizzes created.</p>
+            @else
+                <ul class="list-disc pl-5 text-gray-700">
+                    @foreach($recentQuizzes as $quiz)
+                        <li>
+                            <a href="{{ route('quizzes.show', $quiz) }}" class="text-blue-600 hover:underline">
+                                {{ $quiz->title }}
+                            </a> - Created on {{ $quiz->created_at->format('d M Y') }}
+                        </li>
+                    @endforeach
+                </ul>
+            @endif
         </div>
     </div>
  
