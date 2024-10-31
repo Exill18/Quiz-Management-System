@@ -11,6 +11,12 @@ Welcome to the **Quiz Management System**—a robust web application developed w
 - **Payment Processing**: (WIP) Secure transactions for subscriptions.
 - **Contact Form**: Get in touch for support and inquiries.
 
+## Prerequisites
+
+- PHP >= 8.0
+- Composer
+- SQLite (or another database of your choice)
+
 ## Installation
 
 Follow these steps to get the application up and running:
@@ -31,27 +37,29 @@ Follow these steps to get the application up and running:
 ```bash
    cp .env.example .env
    ```
-5. **Generate an application key**:  
+5. **Configure the `.env` file**: Update the database settings and other configurations as needed.
+
+6. **Generate an application key**:  
 ```bash
    php artisan key:generate
    ```
-6. **Create an SQLite database file**:  
+7. **Create an SQLite database file**:  
 ```bash
    touch database/database.sqlite
    ```
-7. **Migrate the database**:  
+8. **Migrate the database**:  
 ```bash
    php artisan migrate
    ```
-8. **Seed the database**:  
+9. **Seed the database**:  
 ```bash
    php artisan db:seed PlansSeeder
    ```
-9. **Start the development server**:  
+10. **Start the development server**:  
 ```bash
    php artisan serve
    ```
-10. **Open the application in your browser**:  
+11. **Open the application in your browser**:  
     Navigate to: [http://localhost:8000](http://localhost:8000)
 
 ## Usage
@@ -62,3 +70,15 @@ Follow these steps to get the application up and running:
 4. **Save the quiz** and share the link with others to participate.
 5. **View the quiz results and statistics**.
 6. **Manage your profile and subscription plan**.
+
+
+## Running Tests
+
+If you have tests set up, you can run them using the following command:  
+```bash
+php artisan test
+```
+
+## Additional Resources
+
+- [Laravel Documentation](https://laravel.com/docs)
