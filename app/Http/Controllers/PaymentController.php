@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Plan;
 use App\Models\Subscription;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class PaymentController extends Controller
 {
@@ -24,7 +26,7 @@ class PaymentController extends Controller
         $plan = Plan::where('name', $validatedData['plano'])->firstOrFail();
 
         // Example: Create or update subscription for the authenticated user
-        $user = auth()->user();
+        $user = Auth::user();
 
         if ($user->subscription) {
             // Update existing subscription
